@@ -1,8 +1,8 @@
 import history from '../history';
-
 import {
   SIGN_IN,
   SIGN_OUT,
+  CREATE_PROJECT
 } from './types';
 
 export const signIn = userId => {
@@ -17,3 +17,9 @@ export const signOut = () => {
     type: SIGN_OUT
   };
 };
+
+export const createProject = data => {
+  return {
+    type: CREATE_PROJECT
+  };
+}
