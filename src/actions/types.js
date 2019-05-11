@@ -3,3 +3,6 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const CREATE_PROJECT = 'CREATE_PROJECT';
 export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const FETCH_PROJECTS = 'FETCH_PROJECTS';
+export const UPVOTE_PROJECT = 'UPVOTE_PROJECT';
+export const DOWNVOTE_PROJECT = 'DOWNVOTE_PROJECT';
+export const CREATE_IDEA = 'CREATE_IDEA';

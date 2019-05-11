@@ -8,6 +8,7 @@ import ProjectCreate from './projects/ProjectCreate';
 import ProjectList from './projects/ProjectList';
 import ProjectShow from './projects/ProjectShow';
 import IdeaShow from './ideas/IdeaShow';
+import IdeaCreate from './ideas/IdeaCreate';
 import UserProfile from './users/UserProfile';
 import Header from './Header';
 import history from '../history';
@@ -25,7 +26,8 @@ class App extends React.Component {
               <Route path="/projects/new" exact component={ProjectCreate} />
               <Route path="/projects/:id" exact component={ProjectShow} />
               <Route path="/profile" exact component={UserProfile} />
-              <Route path="/ideas/show" exact component={IdeaShow} />
+              <Route path="/ideas/new" exact component={IdeaCreate} />
+              <Route path="/ideas/:id" exact component={IdeaShow} />
             </Switch>
           </div>
         </Router>

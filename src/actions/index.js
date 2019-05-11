@@ -5,7 +5,10 @@ import {
   SIGN_OUT,
   CREATE_PROJECT,
   FETCH_PROJECTS,
-  FETCH_PROJECT
+  FETCH_PROJECT,
+  UPVOTE_PROJECT,
+  DOWNVOTE_PROJECT,
+  CREATE_IDEA
 } from './types';
 
 export const signIn = userId => {
@@ -21,7 +24,7 @@ export const signOut = () => {
   };
 };
 
-export const createProject = formValues => async (dispatch, getState) => {
+export const createProject = formValues => async dispatch => {
   const response = await projects.post('/projects', {
     ...formValues,
     author: 'Dimos Kavalas'
@@ -51,4 +54,36 @@ export const fetchProject = id => async dispatch => {
     type: FETCH_PROJECT,
     payload: response.data
   });
+};
+
+export const upvoteProject = id => async dispatch => {
+  const response = await projects.get(`/projects/${id}/upvote`);
+
+  dispatch({
+    type: UPVOTE_PROJECT,
+    paylod: response.data
+  });
+};
+
+export const downvoteProject = id => async dispatch => {
+  const response = await projects.get(`/projects/${id}/downvote`);
+
+  dispatch({
+    type: DOWNVOTE_PROJECT,
+    paylod: response.data
+  });
+};
+
+export const createIdea = formValues => async dispatch => {
+  const response = await projects.post('/ideas', {
+    ...formValues,
+    author: 'Christos Sotirelis'
+  });
+
+  dispatch({
+    type: CREATE_IDEA,
+    payload: response.data
+  });
+
+  history.push('/');
 };

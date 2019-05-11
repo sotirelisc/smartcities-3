@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchProject } from '../../actions';
+import {
+  fetchProject,
+  upvoteProject,
+  downvoteProject
+} from '../../actions';
 
 class ProjectShow extends React.Component {
   componentDidMount() {
@@ -18,7 +22,7 @@ class ProjectShow extends React.Component {
       );
     }
 
-    const { title, description, author, category } = this.props.project;
+    const { _id, title, description, author, category, votes } = this.props.project;
 
     return (
       <div style={{ marginTop: '2rem' }}>
@@ -48,8 +52,11 @@ class ProjectShow extends React.Component {
               </div>
               <div style={{ marginTop: '1rem' }} className="extra content">
                 <div className="ui two buttons">
-                  <div className="ui positive button"><i className="large thumbs up icon" /></div>
-                  <div className="ui negative button"><i className="large thumbs down icon" /></div>
+                  <div onClick={() => this.props.upvoteProject(_id)} className="ui positive button"><i className="large thumbs up icon" /></div>
+                  <div onClick={() => this.props.downvoteProject(_id)} className="ui negative button"><i className="large thumbs down icon" /></div>
+                </div>
+                <div className="center aligned ui tiny message">
+                  {votes.positive} people voted <strong>Yes</strong>
                 </div>
               </div>
             </div>
@@ -71,5 +78,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default connect(mapStateToProps, {
-  fetchProject
+  fetchProject,
+  upvoteProject,
+  downvoteProject
 })(ProjectShow);

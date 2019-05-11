@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 class ProjectForm extends React.Component {
   renderError({ error, touched }) {
