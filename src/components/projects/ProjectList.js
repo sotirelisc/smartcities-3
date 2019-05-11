@@ -14,10 +14,12 @@ class ProjectList extends React.Component {
       return this.props.projects.map(project => {
         return (
           <ProjectRow
+            id={project._id}
             key={project._id}
             title={project.title}
             description={project.description}
             author={project.author}
+            category={project.category}
           />
         );
       });
@@ -26,7 +28,6 @@ class ProjectList extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <React.Fragment>
         <div className="container">
@@ -42,7 +43,7 @@ class ProjectList extends React.Component {
         <div className="container">
           <h2 style={{ marginTop: '3em' }}>Ideas by Municipality</h2>
           Vote on projects
-          <div style={{ marginTop: '0.5em' }} className="ui four stackable cards">
+          <div style={{ marginTop: '0.5em' }} className="ui three stackable cards">
             {this.renderList()}
           </div>
         </div>

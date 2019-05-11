@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 
 class ProjectForm extends React.Component {
   renderError({ error, touched }) {
@@ -51,6 +51,16 @@ class ProjectForm extends React.Component {
           label="Funding Goal"
           component={this.renderInput}
         />
+        <div className="field">
+          <label>Category</label>
+          <Field name="category" component="select">
+            <option></option>
+            <option value="Technical">Technical</option>
+            <option value="Digital Services for Citizens">Digital Services for Citizens</option>
+            <option value="Green City">Green City</option>
+            <option value="School Premises">School Premises</option>
+          </Field>
+        </div>
         <button className="ui button primary">
           Submit
         </button>
@@ -59,7 +69,8 @@ class ProjectForm extends React.Component {
   }
 }
 
-const validate = ({ title, description, goal }) => {
+const validate = ({ title, description, goal, category }) => {
+  console.log(category);
   const errors = {};
 
   if (!title) {
