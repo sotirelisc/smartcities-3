@@ -2,11 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import IdeaRow from '../ideas/IdeaRow';
 import ProjectRow from './ProjectRow';
-import { fetchProjects } from '../../actions';
+import { fetchProjects, fetchIdeas } from '../../actions';
 
 class ProjectList extends React.Component {
   componentDidMount() {
     this.props.fetchProjects();
+    this.props.fetchIdeas();
+  }
+
+  renderIdeasList() {
+    if (this.props.ideas) {
+      return this.props.ideas.map(idea => {
+        return (
+          <IdeaRow
+            id={idea._id}
+            key={idea._id}
+            title={idea.title}
+            description={idea.description}
+            author={idea.author}
+            category={idea.category}
+          />
+        );
+      });
+    }
+    return 'Loading';
   }
 
   renderList() {
@@ -34,10 +53,7 @@ class ProjectList extends React.Component {
           <h2 style={{ marginTop: '2em' }}>Ideas by Citizens</h2>
           Tell us your opinion
           <div style={{ marginTop: '0.5em' }} className="ui four stackable cards">
-            <IdeaRow />
-            <IdeaRow />
-            <IdeaRow />
-            <IdeaRow />
+            {this.renderIdeasList()}
           </div>
         </div>
         <div className="container">
@@ -55,9 +71,11 @@ class ProjectList extends React.Component {
 const mapStateToProps = state => {
   return {
     projects: Object.values(state.projects),
+    ideas: Object.values(state.ideas),
   };
 };
 
 export default connect(mapStateToProps, {
-  fetchProjects
+  fetchProjects,
+  fetchIdeas
 })(ProjectList);

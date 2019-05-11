@@ -8,7 +8,8 @@ import {
   FETCH_PROJECT,
   UPVOTE_PROJECT,
   DOWNVOTE_PROJECT,
-  CREATE_IDEA
+  CREATE_IDEA,
+  FETCH_IDEAS
 } from './types';
 
 export const signIn = userId => {
@@ -86,4 +87,13 @@ export const createIdea = formValues => async dispatch => {
   });
 
   history.push('/');
+};
+
+export const fetchIdeas = () => async dispatch => {
+  const response = await projects.get('/ideas');
+
+  dispatch({
+    type: FETCH_IDEAS,
+    payload: response.data
+  });
 };

@@ -6,3 +6,5 @@ export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 export const UPVOTE_PROJECT = 'UPVOTE_PROJECT';
 export const DOWNVOTE_PROJECT = 'DOWNVOTE_PROJECT';
 export const CREATE_IDEA = 'CREATE_IDEA';
+export const FETCH_IDEAS = 'FETCH_IDEAS';
+export const FETCH_IDEA = 'FETCH_IDEA';

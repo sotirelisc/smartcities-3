@@ -13,6 +13,7 @@ class IdeaCreate extends React.Component {
       <div>
         <h3>Propose an Idea</h3>
         Would you like something built in your city? Tell us more!
+        <div style={{ marginTop: '2em' }}></div>
         <IdeaForm
           onSubmit={this.onSubmit}
         />
