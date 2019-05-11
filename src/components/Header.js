@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <div style={{ marginTop: '2px' }} className="ui stackable menu large">
+    <div style={{ marginTop: '0.5em' }} className="ui stackable menu large">
       <Link to="/" className="item">
-        decit
+        <i className="home icon" />
       </Link>
-      <Link to="/" className="item active">
-        Home
+      <Link to="/profile" className="item">
+        <i className="user icon" />
       </Link>
-      <Link to="/project/new" className="item right">
+      <Link to="/projects/new" className="item right">
         <div className="ui red button">
-          <i className="plus icon"></i>New
+          New Project
         </div>
       </Link>
     </div>

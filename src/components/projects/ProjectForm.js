@@ -6,7 +6,7 @@ class ProjectForm extends React.Component {
     if (touched && error) {
       return (
         <div className="ui error message">
-          <div className="header">{error}</div>
+          {error}
         </div>
       );
     }
@@ -40,6 +40,17 @@ class ProjectForm extends React.Component {
           label="Enter Description"
           component={this.renderInput}
         />
+        <Field
+          name="location"
+          label="Location"
+          component={this.renderInput}
+        />
+        <Field
+          name="goal"
+          type="number"
+          label="Funding Goal"
+          component={this.renderInput}
+        />
         <button className="ui button primary">
           Submit
         </button>
@@ -48,7 +59,7 @@ class ProjectForm extends React.Component {
   }
 }
 
-const validate = ({ title, description }) => {
+const validate = ({ title, description, goal }) => {
   const errors = {};
 
   if (!title) {
@@ -57,6 +68,14 @@ const validate = ({ title, description }) => {
 
   if (!description) {
     errors.description = 'Please enter a description.'
+  }
+
+  if (!goal) {
+    errors.goal = 'Please enter a funding goal.'
+  }
+
+  if (goal <= 0) {
+    errors.goal = 'Funding goal has to be greater than 0.'
   }
 
   return errors;
