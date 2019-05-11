@@ -6,9 +6,9 @@ class ProjectRow extends React.Component {
     return (
       <Link className="ui card" to="/projects/show">
         <div className="content">
-          <div className="card header">Parko</div>
-          <div class="meta">
-            Dimos Kavalas
+          <div className="card header">{this.props.title}</div>
+          <div className="meta">
+            {this.props.author}
           </div>
         </div>
         <div className="image">

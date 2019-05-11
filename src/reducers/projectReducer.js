@@ -12,17 +12,17 @@ export default (state = initialState, action) => {
     case CREATE_PROJECT:
       return {
         ...state,
-        [action.payload.id]: action.payload
+        [action.payload._id]: action.payload
       };
     case FETCH_PROJECT:
       return {
         ...state,
-        [action.payload.id]: action.payload
+        [action.payload._id]: action.payload
       };
     case FETCH_PROJECTS:
       return {
         ...state,
-        ..._.mapKeys(action.payload, 'id')
+        ..._.mapKeys(action.payload, '_id')
       };
     default:
       return state;
