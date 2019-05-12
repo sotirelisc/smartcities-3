@@ -10,6 +10,11 @@ const Header = () => {
       <Link to="/profile" className="item">
         <i className="user icon" />
       </Link>
+      <Link to="/ideas/new" className="item">
+        <div className="ui blue button">
+          New Idea
+        </div>
+      </Link>
       <Link to="/projects/new" className="item right">
         <div className="ui red button">
           New Project

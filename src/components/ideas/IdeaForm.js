@@ -40,6 +40,16 @@ class IdeaForm extends React.Component {
           label="Enter Description"
           component={this.renderInput}
         />
+        <div className="field">
+          <label>Category</label>
+          <Field name="category" component="select">
+            <option></option>
+            <option value="Technical">Technical</option>
+            <option value="Digital Services for Citizens">Digital Services for Citizens</option>
+            <option value="Green City">Green City</option>
+            <option value="School Premises">School Premises</option>
+          </Field>
+        </div>
         <button className="ui button green">
           Create
         </button>

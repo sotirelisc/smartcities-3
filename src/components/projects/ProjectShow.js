@@ -106,10 +106,8 @@ class ProjectShow extends React.Component {
       );
     }
 
-    console.log(this.state);
-
     this.props.selectProject(this.props.project);
-    const { _id, title, description, author, category, votes } = this.props.project;
+    const { title, description, author, category } = this.props.project;
 
     return (
       <div style={{ marginTop: '2rem' }}>

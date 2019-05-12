@@ -11,7 +11,11 @@ import {
   CREATE_IDEA,
   FETCH_IDEAS,
   SELECT_PROJECT,
-  PAY_FOR_PROJECT
+  PAY_FOR_PROJECT,
+  FETCH_USER,
+  WITHDRAW_TOKENS,
+  FETCH_IDEA,
+  WITHDRAW_TOKENS_SUCCESS
 } from './types';
 
 export const payForProject = (projectId, amount) => async dispatch => {
@@ -19,8 +23,6 @@ export const payForProject = (projectId, amount) => async dispatch => {
     amount: parseFloat(amount),
     user_id: '5cd7e176a48c5b8480c3dd82'
   });
-
-  console.log(response.data);
 
   dispatch({
     type: PAY_FOR_PROJECT,
@@ -119,4 +121,40 @@ export const fetchIdeas = () => async dispatch => {
     type: FETCH_IDEAS,
     payload: response.data
   });
+};
+
+export const fetchIdea = id => async dispatch => {
+  const response = await projects.get(`/ideas/${id}`);
+
+  dispatch({
+    type: FETCH_IDEA,
+    payload: response.data
+  });
+};
+
+export const fetchUser = id => async dispatch => {
+  const response = await projects.get(`/user/${id}`);
+
+  dispatch({
+    type: FETCH_USER,
+    payload: response.data
+  });
+};
+
+export const withdrawTokens = (userId, address, amount) => {
+  return async dispatch => {
+    dispatch({
+      type: WITHDRAW_TOKENS
+    });
+
+    const response = await projects.post(`/user/${userId}/withdraw`, {
+      address,
+      amount
+    });
+
+    dispatch({
+      type: WITHDRAW_TOKENS_SUCCESS,
+      payload: response.data
+    });
+  };
 };

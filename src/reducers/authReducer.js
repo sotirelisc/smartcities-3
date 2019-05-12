@@ -1,6 +1,9 @@
 import {
   SIGN_IN,
-  SIGN_OUT
+  SIGN_OUT,
+  FETCH_USER,
+  WITHDRAW_TOKENS,
+  WITHDRAW_TOKENS_SUCCESS
 } from '../actions/types';
 
 const initialState = {
@@ -21,6 +24,22 @@ export default (state = initialState, action) => {
         ...state,
         isSignedIn: false,
         userId: null
+      };
+    case FETCH_USER:
+      return {
+        ...state,
+        user: action.payload
+      };
+    case WITHDRAW_TOKENS:
+      return {
+        ...state,
+        tokensLoading: true
+      };
+    case WITHDRAW_TOKENS_SUCCESS:
+      return {
+        ...state,
+        tokens: action.payload,
+        tokensLoading: false
       };
     default:
       return state;
