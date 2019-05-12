@@ -11,7 +11,7 @@ import {
 class ProjectShow extends React.Component {
   state = {
     voted: false,
-    fundInputValue: 0,
+    fundInputValue: '',
     paid: false
   }
 
@@ -33,7 +33,7 @@ class ProjectShow extends React.Component {
 
   onFundSubmit = () => {
     if (this.state.fundInputValue && this.state.fundInputValue > 0) {
-      this.setState({ paid: true });
+      this.setState({ paid: true, fundInputValue: '' });
 
       this.props.payForProject(this.props.project._id, this.state.fundInputValue);
     }
@@ -80,12 +80,12 @@ class ProjectShow extends React.Component {
             </div>
             <div style={{ marginTop: '1rem' }} className="center aligned extra content">
               <div className="ui big input focus">
-                <input onChange={e => this.setState({ fundInputValue: e.target.value })} type="text" placeholder="5€" />
+                <input value={this.state.fundInputValue} onChange={e => this.setState({ fundInputValue: e.target.value })} type="text" placeholder="5€" />
               </div>
             </div>
             <div className="center aligned" style={{ marginTop: '1rem' }}>
               <div onClick={() => this.onFundSubmit()} className={`ui primary big button ${this.state.paid ? 'disabled' : ''}`}>
-                Pay
+                Pay Now
               </div>
               <div className="center aligned ui huge message">
                 {fund_raised}€ raised from <strong>{goal}€</strong>
