@@ -3,17 +3,33 @@ import { connect } from 'react-redux';
 import {
   fetchProject,
   upvoteProject,
-  downvoteProject
+  downvoteProject,
+  selectProject
 } from '../../actions';
 
 class ProjectShow extends React.Component {
+  state = {
+    voted: false
+  }
+
   componentDidMount() {
     const { id } = this.props.match.params;
 
     this.props.fetchProject(id);
   }
 
+  upvoteProject = id => {
+    this.props.upvoteProject(id);
+    this.setState({ voted: true });
+  };
+
+  downvoteProject = id => {
+    this.props.downvoteProject(id);
+    this.setState({ voted: true });
+  };
+
   render() {
+    console.log(this.state)
     if (!this.props.project) {
       return (
         <div className="ui active inverted dimmer">
@@ -22,6 +38,7 @@ class ProjectShow extends React.Component {
       );
     }
 
+    this.props.selectProject(this.props.project);
     const { _id, title, description, author, category, votes } = this.props.project;
 
     return (
@@ -52,10 +69,10 @@ class ProjectShow extends React.Component {
               </div>
               <div style={{ marginTop: '1rem' }} className="extra content">
                 <div className="ui two buttons">
-                  <div onClick={() => this.props.upvoteProject(_id)} className="ui positive button"><i className="large thumbs up icon" /></div>
-                  <div onClick={() => this.props.downvoteProject(_id)} className="ui negative button"><i className="large thumbs down icon" /></div>
+                  <div onClick={() => this.upvoteProject(_id)} className={`ui positive button ${this.state.voted ? 'disabled' : ''}`}><i className="large thumbs up icon" /></div>
+                  <div onClick={() => this.downvoteProject(_id)} className={`ui negative button ${this.state.voted ? 'disabled' : ''}`}><i className="large thumbs down icon" /></div>
                 </div>
-                <div className="center aligned ui tiny message">
+                <div className="center aligned ui huge message">
                   {votes.positive} people voted <strong>Yes</strong>
                 </div>
               </div>
@@ -73,12 +90,13 @@ class ProjectShow extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    project: state.projects[ownProps.match.params.id]
+    project: state.projects[ownProps.match.params.id],
   };
 };
 
 export default connect(mapStateToProps, {
   fetchProject,
   upvoteProject,
-  downvoteProject
+  downvoteProject,
+  selectProject
 })(ProjectShow);

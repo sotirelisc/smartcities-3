@@ -8,3 +8,4 @@ export const DOWNVOTE_PROJECT = 'DOWNVOTE_PROJECT';
 export const CREATE_IDEA = 'CREATE_IDEA';
 export const FETCH_IDEAS = 'FETCH_IDEAS';
 export const FETCH_IDEA = 'FETCH_IDEA';
+export const SELECT_PROJECT = 'SELECT_PROJECT';

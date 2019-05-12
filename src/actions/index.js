@@ -9,8 +9,16 @@ import {
   UPVOTE_PROJECT,
   DOWNVOTE_PROJECT,
   CREATE_IDEA,
-  FETCH_IDEAS
+  FETCH_IDEAS,
+  SELECT_PROJECT
 } from './types';
+
+export const selectProject = project => {
+  return {
+    type: SELECT_PROJECT,
+    payload: project
+  };
+};
 
 export const signIn = userId => {
   return {
@@ -62,7 +70,7 @@ export const upvoteProject = id => async dispatch => {
 
   dispatch({
     type: UPVOTE_PROJECT,
-    paylod: response.data
+    payload: response.data
   });
 };
 
@@ -71,7 +79,7 @@ export const downvoteProject = id => async dispatch => {
 
   dispatch({
     type: DOWNVOTE_PROJECT,
-    paylod: response.data
+    payload: response.data
   });
 };
 
