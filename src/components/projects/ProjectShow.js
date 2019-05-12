@@ -4,12 +4,15 @@ import {
   fetchProject,
   upvoteProject,
   downvoteProject,
-  selectProject
+  selectProject,
+  payForProject
 } from '../../actions';
 
 class ProjectShow extends React.Component {
   state = {
-    voted: false
+    voted: false,
+    fundInputValue: 0,
+    paid: false
   }
 
   componentDidMount() {
@@ -28,8 +31,73 @@ class ProjectShow extends React.Component {
     this.setState({ voted: true });
   };
 
+  onFundSubmit = () => {
+    if (this.state.fundInputValue && this.state.fundInputValue > 0) {
+      this.setState({ paid: true });
+
+      this.props.payForProject(this.props.project._id, this.state.fundInputValue);
+    }
+  }
+
+  renderSecondCard() {
+    if (this.props.project) {
+      const { _id, title, author, votes, goal, fund_raised } = this.props.project;
+
+      if (this.props.project.stage === 'VOTING') {
+        return (
+          <div className="ui card">
+            <div className="content">
+              <div className="center aligned card header">Vote</div>
+              <div className="center aligned meta">
+                <strong>{title}</strong>by <strong>{author}</strong>
+              </div>
+              <div style={{ marginTop: '5rem' }} className="center aligned description">
+                Would you like to see this happen?
+              </div>
+              <div style={{ marginTop: '1rem' }} className="extra content">
+                <div className="ui two buttons">
+                  <div onClick={() => this.upvoteProject(_id)} className={`ui positive button ${this.state.voted ? 'disabled' : ''}`}><i className="large thumbs up icon" /></div>
+                  <div onClick={() => this.downvoteProject(_id)} className={`ui negative button ${this.state.voted ? 'disabled' : ''}`}><i className="large thumbs down icon" /></div>
+                </div>
+                <div className="center aligned ui huge message">
+                  {votes.positive} people voted <strong>Yes</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div className="ui card">
+          <div className="content">
+            <div className="center aligned card header">Fundraising</div>
+            <div className="center aligned meta">
+              <strong>{title}</strong>by <strong>{author}</strong>
+            </div>
+            <div style={{ marginTop: '5rem' }} className="center aligned description">
+              Contribute and get rewarded
+            </div>
+            <div style={{ marginTop: '1rem' }} className="center aligned extra content">
+              <div className="ui big input focus">
+                <input onChange={e => this.setState({ fundInputValue: e.target.value })} type="text" placeholder="5€" />
+              </div>
+            </div>
+            <div className="center aligned" style={{ marginTop: '1rem' }}>
+              <div onClick={() => this.onFundSubmit()} className={`ui primary big button ${this.state.paid ? 'disabled' : ''}`}>
+                Pay
+              </div>
+              <div className="center aligned ui huge message">
+                {fund_raised}€ raised from <strong>{goal}€</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
-    console.log(this.state)
     if (!this.props.project) {
       return (
         <div className="ui active inverted dimmer">
@@ -37,6 +105,8 @@ class ProjectShow extends React.Component {
         </div>
       );
     }
+
+    console.log(this.state);
 
     this.props.selectProject(this.props.project);
     const { _id, title, description, author, category, votes } = this.props.project;
@@ -58,26 +128,7 @@ class ProjectShow extends React.Component {
               <img alt="" src="../parko.jpg" />
             </div>
           </div>
-          <div className="ui card" to="/project/show">
-            <div className="content">
-              <div className="center aligned card header">Vote</div>
-              <div className="center aligned meta">
-                <strong>{title}</strong>by <strong>{author}</strong>
-              </div>
-              <div style={{ marginTop: '5rem' }} className="center aligned description">
-                Would you like to see this happen?
-              </div>
-              <div style={{ marginTop: '1rem' }} className="extra content">
-                <div className="ui two buttons">
-                  <div onClick={() => this.upvoteProject(_id)} className={`ui positive button ${this.state.voted ? 'disabled' : ''}`}><i className="large thumbs up icon" /></div>
-                  <div onClick={() => this.downvoteProject(_id)} className={`ui negative button ${this.state.voted ? 'disabled' : ''}`}><i className="large thumbs down icon" /></div>
-                </div>
-                <div className="center aligned ui huge message">
-                  {votes.positive} people voted <strong>Yes</strong>
-                </div>
-              </div>
-            </div>
-          </div>
+          {this.renderSecondCard()}
         </div>
         <div className="ui piled segment">
           <h4 className="ui header">Description</h4>
@@ -98,5 +149,6 @@ export default connect(mapStateToProps, {
   fetchProject,
   upvoteProject,
   downvoteProject,
-  selectProject
+  selectProject,
+  payForProject
 })(ProjectShow);

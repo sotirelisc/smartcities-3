@@ -4,8 +4,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  isSignedIn: null,
-  userId: null
+  isSignedIn: true,
+  userId: '5cd7e176a48c5b8480c3dd82'
 };
 
 export default (state = initialState, action) => {

@@ -10,8 +10,23 @@ import {
   DOWNVOTE_PROJECT,
   CREATE_IDEA,
   FETCH_IDEAS,
-  SELECT_PROJECT
+  SELECT_PROJECT,
+  PAY_FOR_PROJECT
 } from './types';
+
+export const payForProject = (projectId, amount) => async dispatch => {
+  const response = await projects.post(`/projects/${projectId}/donate`, {
+    amount: parseFloat(amount),
+    user_id: '5cd7e176a48c5b8480c3dd82'
+  });
+
+  console.log(response.data);
+
+  dispatch({
+    type: PAY_FOR_PROJECT,
+    payload: response.data.project
+  });
+};
 
 export const selectProject = project => {
   return {

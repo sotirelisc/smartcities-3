@@ -2,35 +2,19 @@ import React from 'react';
 
 class IdeaShow extends React.Component {
   render() {
+    console.log(this.props);
     return (
       <div style={{ marginTop: '2rem' }}>
         <div className="ui two stackable cards">
           <div className="ui card" to="/project/show">
             <div className="content">
-              <div className="card header">Parko</div>
-              <div class="meta">
+              <div className="card header"></div>
+              <div className="meta">
                 Dimos Kavalas
               </div>
             </div>
             <div className="image">
               <img alt="" src="../parko.jpg" />
-            </div>
-          </div>
-          <div className="ui card" to="/project/show">
-            <div className="content">
-              <div className="center aligned card header">Vote</div>
-              <div class="center aligned meta">
-                Parko by Dimos Kavalas
-              </div>
-              <div style={{ marginTop: '5rem' }} class="center aligned description">
-                Would you like to see this happen?
-              </div>
-              <div style={{ marginTop: '1rem' }} class="extra content">
-                <div class="ui two buttons">
-                  <div class="ui positive button"><i className="large thumbs up icon" /></div>
-                  <div class="ui negative button"><i className="large thumbs down icon" /></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

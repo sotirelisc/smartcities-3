@@ -4,13 +4,13 @@ import {
   FETCH_PROJECT,
   FETCH_PROJECTS,
   UPVOTE_PROJECT,
-  DOWNVOTE_PROJECT
+  DOWNVOTE_PROJECT,
+  PAY_FOR_PROJECT
 } from '../actions/types';
 
 const initialState = {};
 
 export default (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case CREATE_PROJECT:
       return {
@@ -33,6 +33,11 @@ export default (state = initialState, action) => {
         [action.payload._id]: action.payload
       };
     case DOWNVOTE_PROJECT:
+      return {
+        ...state,
+        [action.payload._id]: action.payload
+      };
+    case PAY_FOR_PROJECT:
       return {
         ...state,
         [action.payload._id]: action.payload
